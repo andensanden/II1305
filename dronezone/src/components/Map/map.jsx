@@ -17,8 +17,10 @@ import DrawingModeControl from "@/mapScripts/drawingModeControl";
 import ForbiddenZoneDrawing from "@/mapScripts/forbiddenZoneDrawing";
 import { ZonesProvider } from "@/mapScripts/ZonesContext.jsx";
 import { NodesProvider } from "@/mapScripts/nodesContext";
+import { DronepathsProvider } from "@/mapScripts/dronepathsContext";
 //import MapClick from '@/mapScripts/pathDrawing';
 import LocationTracker from "@/mapScripts/locationTracker";
+import { DronepathHandler } from "@/mapScripts/dronepathHandler";
 
 
 //--------------- UI Components -----------
@@ -84,6 +86,9 @@ const Map = () => {
           <ForbiddenZoneDrawing drawingMode={drawingMode} />
         </ZonesProvider>
         </NodesProvider>
+        <DronepathsProvider>
+          <DronepathHandler/>
+        </DronepathsProvider>
       </MapContainer>
     </div>
   );

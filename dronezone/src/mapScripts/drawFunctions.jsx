@@ -26,13 +26,13 @@ function DrawNodes({nodes, color}) {
  * @param {Dronepath[]} props.paths - An array where each element is a path made of [lat, lng] coordinate pairs
  * @returns {JSX.Element} A fragment containing all the path polylines
  */
-function DrawPaths({paths}) {
+function DrawPaths({paths, color}) {
     return (
         <>
             {paths.map((path, index) => { return(
                 <Polyline className = "map-clickable"
                 key={index} positions={path}
-                color="blue" weight={1}/>
+                color={color} weight={1}/>
                 )
             })}
         </>
@@ -45,13 +45,13 @@ function DrawPaths({paths}) {
  * @param {Array<Array<[number, number]>>} props.bufferZones - An array of coordinate arrays representing buffer zones
  * @returns {JSX.Element} A fragment containing all buffer zone polygons
  */
-function DrawBufferZones({bufferZones}) {
+function DrawBufferZones({bufferZones, color}) {
     return (
         <>
             {bufferZones.map((zone, index) => { return(
                 <Polygon className = "map-clickable"
                 key={index} positions={zone}
-                color="blue" fillOpacity={0.3} weight={1}/>
+                color={color} fillOpacity={0.3} weight={1}/>
                 )
             })}
         </>

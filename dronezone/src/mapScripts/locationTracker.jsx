@@ -2,10 +2,6 @@ import { useEffect, useState } from 'react';
 import { Marker, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
-/*
-    Tracks the users location and adds a marker at their position
-*/
-
 /**
  * Method for tracking user's location.
  * @param {boolean} trackingEnabled - whether to track user's location 

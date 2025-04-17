@@ -17,9 +17,11 @@ import DrawingModeControl from "@/mapScripts/drawingModeControl";
 import ForbiddenZoneDrawing from "@/mapScripts/forbiddenZoneDrawing";
 import { ZonesProvider } from "@/mapScripts/ZonesContext.jsx";
 import { NodesProvider } from "@/mapScripts/nodesContext";
+import { DronepathsProvider } from "@/mapScripts/dronepathsContext";
 import MapClick from "@/mapScripts/pathDrawing";
 import LocationTracker from "@/mapScripts/locationTracker";
 import { InFlightProvider } from "./inFlightContext"; // Adjust the path as necessary
+import { DronepathHandler } from "@/mapScripts/dronepathHandler";
 
 //--------------- UI Components -----------
 import { HamburgerButton } from "./layerHamburgerMenu";
@@ -34,6 +36,10 @@ const LoggedInMap = () => {
   const [trackingEnabled, setTrackingEnabled] = useState(true);
   const [drawingMode, setDrawingMode] = useState(null);
   const position = [59.3293, 18.0686]; // Stockholm coordinates
+
+  //-----------------
+  //For launch functionality
+  const [launch, setLaunch] = useState(false);
 
   //-----------------
   //For draw path menu
@@ -99,6 +105,7 @@ const LoggedInMap = () => {
 
   const handleLaunchClick = () => {
     setShowDashboard((prevState) => !prevState);
+    setLaunch((prevState) => !prevState);
   };
 
   return (
@@ -192,7 +199,10 @@ const LoggedInMap = () => {
                 bottom={flightPathMenuOpen ? 100 + 150 : 100}
               />
             )}
-            <MapClick drawingMode={drawingMode} />
+            <DronepathsProvider>
+            <MapClick drawingMode={drawingMode} isLaunched={launch} />
+            <DronepathHandler/>
+            </DronepathsProvider>
             <ForbiddenZoneDrawing drawingMode={drawingMode} />
           </NodesProvider>
         </ZonesProvider>
